@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+
+
+<body>
+
+    <div class="container">
+        <div class="columns">
+            <div class="box">
+                <article class="media">
+                    <div class="media-content">
+                        <div class="content">
+                            <p>
+                                <span class="title">{{ weather.country }}</span> 
+                                <br>
+                                <span class="subtitle">Weather taken for city {{ weather.city }}</span>
+                                <br>
+                                <span class="subtitle">{{ weather.temp_av }} °C</span>
+                                <br> {{ weather.date }}
+                            </p>
+                        </div>
+                    </div>
+                </article>
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="field has-addons">
+                        <div class="control is-expanded">
+                            {{ form.country }}
+                        </div>
+                        <div class="control">
+                            <button class="button is-info">
+                                Add City
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
