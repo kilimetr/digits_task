@@ -2,7 +2,6 @@ from django.shortcuts import render
 # from django.http import HttpResponse
 import requests
 from weather_forecast.models import Weather_Update
-from weather_forecast.forms import Weather_Update_Form
 import json
 
 
@@ -28,8 +27,6 @@ def index(request):
 
     days = 3
 
-    form = Weather_Update_Form()
-
     response = requests.get(url.format(city, days))
 
     if response.status_code != 200:
@@ -44,7 +41,7 @@ def index(request):
         "temp_av": response["forecast"]["forecastday"][0]["day"]["avgtemp_c"]
         }
 
-    context = {"weather": weather, "form": form}
+    context = {"weather": weather}
 
     if country == "CZ":
         city = "Prague"
