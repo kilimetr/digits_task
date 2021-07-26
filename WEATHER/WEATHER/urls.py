@@ -16,10 +16,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+import debug_toolbar
+
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
 
-    path("weather_forecast/", include("weather_forecast.urls"))
+    path('__debug__/', include(debug_toolbar.urls)),
+
+    path("weather-forecast/", include("weather_forecast.urls"))
 ]

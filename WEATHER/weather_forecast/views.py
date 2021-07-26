@@ -1,7 +1,6 @@
 from django.shortcuts import render
-# from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 import requests
-from weather_forecast.models import Weather_Update
 import json
 
 
@@ -10,8 +9,12 @@ import json
 def index(request):
     url = "http://api.weatherapi.com/v1/forecast.json?key=361f4a39a7cb4ab892d131558211807&q={}&days={}"
 
-    country = Weather_Update.objects.all()[0]
-    date    = Weather_Update.date
+    # vzít z modelu
+    # country = Weather_Update.objects.all()[0]
+    # date    = Weather_Update.date
+
+    country = "UK"
+    date = "2021-07-06"
 
     country = str(country)
     print(date)
@@ -64,10 +67,20 @@ def index(request):
 
     final = {"forecast": answer}
 
-    def answer_fun(request, answer):
-        print(request.GET)
-        return render(request, "weather_forecast/index.html", json.dumps(final))
+
+    return render(request, "weather_forecast/index.html", context)
 
 
-    return render(request, "weather_forecast/index.html", context, answer_fun)
+
+
+def jresp_result(request, date, country_code):
+    json_dict = {
+        "date": date,
+        "country_code": country_code
+    }
+
+    print(json_dict)
+
+    return JsonResponse(json_dict)
+
 
